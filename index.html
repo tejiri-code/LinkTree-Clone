@@ -6,8 +6,28 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Linktree</title>
+    <script>
+      function scrollToAboutUs() {
+  const aboutUsDiv = document.getElementById('contact-form');
+  aboutUsDiv.scrollIntoView({ behavior: 'smooth' });
+
+}
+     </script>
 </head>
 <body>
+    <header>
+        <nav>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Projects</a></li>
+            <li><a href="#contact-form" onclick="scrollToAboutUs()">Contact</a></li>
+          </ul>
+        </nav>
+      </header>
+     
+      <hr width="100%"></hr>
+     
   <main>
     <img src="images/tej30.jpg" alt="pic of tej" width="250" height="300" class="profile-pic">
     <h1>Welcome to my links page.</h1>
@@ -17,22 +37,66 @@
   <section>
     <h3>My Favorite things to do</h3>
     <ul>
-<li>Coding</li>
-<li>Project Management</li>
-<li>Design</li>
-<li>Drawing</li>
+      <li>Coding</li>
+      <li>Project Management</li>
+      <li>Design</li>
+      <li>Drawing</li>
     </ul>
-    <h3>Languages i've learnt so far</h3>
+    <h3>Languages I've learnt so far</h3>
     <ol>
-        <li>HTML</li>
-        <li>CSS</li>
-        <li>JavaScript</li>
-        <li>ReactJS</li>
-        <li>C</li>
-        <li>C++</li>
-        <li>Java</li>
+      <li>HTML</li>
+      <li>CSS</li>
+      <li>JavaScript</li>
+      <li>ReactJS</li>
+      <li>C</li>
+      <li>C++</li>
+      <li>Java</li>
     </ol>
+    <h3>Contact Me</h3>
+    <form id="contact-form" method="post">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+      <label for="message">Message:</label>
+      <textarea id="message" name="message" required></textarea>
+      <input type="submit" value="Send">
+    </form>
   </section> 
 </main> 
+
+<script>
+  // Get the form element
+  const form = document.getElementById('contact-form');
+
+  // Handle form submission
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    // Get form data
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+
+    // Send form data to server
+    fetch('https://example.com/contact', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ name, email, message })
+    })
+    .then(response => response.json())
+    .then(data => {
+      // Show success message
+      alert('Your message has been sent!');
+      form.reset();
+    })
+    .catch(error => {
+      // Show error message
+      alert('An error occurred. Please try again later.');
+    });
+  });
+</script>
+
 </body>
 </html>
